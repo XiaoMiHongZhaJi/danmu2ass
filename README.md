@@ -31,7 +31,7 @@ xml 解析器默认使用 quick_xml
 
 # 安装
 - 下载 https://github.com/XiaoMiHongZhaJi/danmu2ass 中的 release
-    - 对于 Windows 用户，默认 zip 内会有一个 配置文件.toml，更改其中内容即可更改配置。
+    - 对于 Windows 用户，[resources](resources) 内会有一个 配置文件.toml，更改其中内容即可更改配置。
     - 该配置文件存在时不会解析命令行输入
 
 # 使用
