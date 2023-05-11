@@ -38,7 +38,7 @@ pub struct Args {
     #[clap(
         long = "font",
         short = 'f',
-        help = "弹幕使用字体。单位：像素",
+        help = "弹幕使用字体",
         default_value = "微软雅黑"
     )]
     font: String,

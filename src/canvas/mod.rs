@@ -98,14 +98,14 @@ impl Canvas {
         if !collisions.is_empty() {
             collisions.sort_unstable();
             let (FloatOrd(time_need), lane_idx) = collisions[0];
-            if time_need < 1.0 {
-                debug!("延迟弹幕 {} 秒", time_need);
-                // 只允许延迟 1s
+            if time_need < 10.0 {
+                info!("{} 秒密度过高，延迟{:.2}秒：{}", danmu.timeline_s, time_need, danmu.content);
+                // 只允许延迟 10s
                 danmu.timeline_s += time_need + 0.01; // 间隔也不要太小了
                 return Some(self.draw_float_in_lane(danmu, lane_idx));
             }
         }
-        debug!("skipping danmu: {}", danmu.content);
+        info!("{} 秒密度过高，跳过：      {}", danmu.timeline_s, danmu.content);
         None
     }
 

@@ -135,7 +135,7 @@ OPTIONS:
             黑名单，需要过滤的关键词列表文件，每行一个关键词
 
     -f, --font <FONT>
-            弹幕使用字体。单位：像素 [default: 微软雅黑]
+            弹幕使用字体 [default: 微软雅黑]
 
         --font-size <FONT_SIZE>
             弹幕字体大小 [default: 25]

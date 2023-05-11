@@ -20,7 +20,7 @@ pub struct Danmu {
     pub content: String,
     pub r#type: DanmuType,
     /// 虽然这里有 fontsize，但是我们实际上使用 canvas config 的 font size，
-    /// 否在在调节分辨率的时候字体会发生变化。
+    /// 否则在调节分辨率的时候字体会发生变化。
     pub fontsize: u32,
     pub rgb: (u8, u8, u8),
 }
