@@ -24,69 +24,28 @@ impl std::str::FromStr for InputType {
     type Err = anyhow::Error;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match url::Url::parse(s) {
-            Ok(url) => {
-                info!("输入类型为 URL，解析中...");
-                Self::from_url(url)
+        if s.chars().all(|c| c.is_ascii_alphanumeric()) {
+            if s.starts_with("BV") {
+                return Ok(InputType::BV {
+                    bv: s.to_string(),
+                    p: None,
+                });
             }
-            Err(_) => {
-                if s.chars().all(|c| c.is_ascii_alphanumeric()) {
-                    if s.starts_with("BV") {
-                        return Ok(InputType::BV {
-                            bv: s.to_string(),
-                            p: None,
-                        });
-                    }
-                    if let Ok(t) = Self::from_episode_or_season_str(s) {
-                        return Ok(t);
-                    }
-                }
+            if let Ok(t) = Self::from_episode_or_season_str(s) {
+                return Ok(t);
+            }
+        }
 
-                let path = PathBuf::from(s);
-                if path.is_dir() {
-                    Ok(InputType::Folder(path))
-                } else {
-                    Ok(InputType::File(path))
-                }
-            }
+        let path = PathBuf::from(s);
+        if path.is_dir() {
+            Ok(InputType::Folder(path))
+        } else {
+            Ok(InputType::File(path))
         }
     }
 }
 
 impl InputType {
-    pub fn from_url(url: url::Url) -> Result<Self> {
-        if url.domain() != Some("www.bilibili.com") {
-            anyhow::bail!("不支持的域名 {}", url.domain().unwrap_or(""));
-        }
-        let mut path = url
-            .path_segments()
-            .context("解析 URL 的 path segments 错误")?;
-        let first_segment = path.next().context("解析 URL 的 path segments 错误")?;
-        match first_segment {
-            "video" => {
-                let bv = path
-                    .next()
-                    .context("解析 URL 的 path segments 错误")?
-                    .to_string();
-                let p = url
-                    .query_pairs()
-                    .find(|(k, _)| k == "p")
-                    .and_then(|(_, v)| v.parse().ok());
-                Ok(InputType::BV { bv, p })
-            }
-            "bangumi" => {
-                anyhow::ensure!(
-                    path.next() == Some("play"),
-                    "不合法的 URL，应该是 bangumi/play"
-                );
-                let id = path.next().context("解析 URL 的 path segments 错误")?;
-                InputType::from_episode_or_season_str(id)
-            }
-            _ => {
-                anyhow::bail!("不支持的 URL，应该是 video/BV1z44y1E7m6 或 bangumi/play/ss28296 或 bangumi/play/ep473502");
-            }
-        }
-    }
 
     pub fn from_episode_or_season_str(s: &str) -> Result<Self> {
         match s.chars().take(2).collect::<String>().as_str() {
