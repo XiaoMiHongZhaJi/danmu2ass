@@ -15,7 +15,7 @@ width = 1280
 height = 720
 
 # 使用字体名称
-font = "黑体"
+font = "微软雅黑"
 
 # 弹幕字体大小
 font_size = 25
@@ -26,31 +26,34 @@ font_size = 25
 #   有的字体比较细、比较窄，可以适当调小 width_ratio（如 1.0、1.2）。
 # horizontal_gap 用来调整弹幕时间的水平距离，单位是像素，如果想拉开弹幕之间的距离，可以调大 horizontal_gap
 width_ratio = 1.2
-horizontal_gap = 20.0
+horizontal_gap = 5.0
 
 # 计算弹幕高度的数值，即【行高度/行间距】。数值越大，弹幕的垂直距离越大
-lane_size = 32
+lane_size = 25
 
 # 弹幕在屏幕上的【持续时间】，单位为秒，可以有小数
-duration = 15
+duration = 12
 
 # 【正常弹幕的屏幕填充占比】，默认为 50%，即“半屏填充”。
-float_percentage = 0.5
+float_percentage = 1
 
 # 弹幕的不透明度，越小越透明，越大越不透明
-alpha = 0.7
+alpha = 1
 
 # 默认会跳过 ass 比 xml 修改时间更晚的文件，修改此参数为 true 会强制转换
-force = false
+force = true
 
 # 黑名单，需要过滤的关键词列表文件，每行一个关键词
 # denylist = "黑名单.txt"
 
 # 在处理完后暂停等待输入
-pause = true
+pause = false
 
 # 弹幕的描边宽度，单位为像素
-outline = 0.8
+outline = 1
+
+# 弹幕的阴影宽度，单位为像素
+shadow = 1
 
 # 字体是否加粗
 bold = false

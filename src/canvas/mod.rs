@@ -29,6 +29,8 @@ pub struct Config {
     pub bold: u8,
     /// 描边
     pub outline: f64,
+    /// 阴影
+    pub shadow: f64,
     /// 时间轴偏移
     pub time_offset: f64,
 }
@@ -62,9 +64,7 @@ impl Canvas {
         }
         match danmu.r#type {
             crate::danmu::DanmuType::Float => Ok(self.draw_float(danmu)),
-            crate::danmu::DanmuType::Bottom
-            | crate::danmu::DanmuType::Top
-            | crate::danmu::DanmuType::Reverse => {
+            crate::danmu::DanmuType::Bottom | crate::danmu::DanmuType::Top | crate::danmu::DanmuType::Reverse => {
                 // 不喜欢底部弹幕，直接转成 Bottom
                 // 这是 feature 不是 bug
                 danmu.r#type = crate::danmu::DanmuType::Float;

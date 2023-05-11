@@ -39,7 +39,7 @@ pub struct Args {
         long = "font",
         short = 'f',
         help = "弹幕使用字体。单位：像素",
-        default_value = "黑体"
+        default_value = "微软雅黑"
     )]
     font: String,
 
@@ -56,7 +56,7 @@ pub struct Args {
     #[clap(
         long = "horizontal-gap",
         help = "每条弹幕之间的最小水平间距，为避免重叠可以调大这个数值。单位：像素",
-        default_value = "20.0"
+        default_value = "5.0"
     )]
     #[serde(default)]
     horizontal_gap: f64,
@@ -65,7 +65,7 @@ pub struct Args {
         long = "duration",
         short = 'd',
         help = "弹幕在屏幕上的持续时间，单位为秒，可以有小数",
-        default_value = "15"
+        default_value = "12"
     )]
     duration: f64,
 
@@ -73,7 +73,7 @@ pub struct Args {
         long = "lane-size",
         short = 'l',
         help = "弹幕所占据的高度，即“行高度/行间距”",
-        default_value = "32"
+        default_value = "25"
     )]
     lane_size: u32,
 
@@ -81,7 +81,7 @@ pub struct Args {
         long = "float-percentage",
         short = 'p',
         help = "屏幕上滚动弹幕最多高度百分比",
-        default_value = "0.5"
+        default_value = "1"
     )]
     float_percentage: f64,
 
@@ -89,13 +89,14 @@ pub struct Args {
         long = "alpha",
         short = 'a',
         help = "弹幕不透明度",
-        default_value = "0.7"
+        default_value = "1"
     )]
     alpha: f64,
 
     #[clap(
         long = "force",
-        help = "默认会跳过 ass 比 xml 修改时间更晚的文件，此参数会强制转换"
+        help = "默认会跳过 ass 比 xml 修改时间更晚的文件，此参数会强制转换",
+        default_value = "true"
     )]
     pub force: bool,
 
@@ -108,8 +109,11 @@ pub struct Args {
     #[clap(long = "pause", help = "在处理完后暂停等待输入")]
     pub pause: bool,
 
-    #[clap(long = "outline", help = "描边宽度", default_value = "0.8")]
+    #[clap(long = "outline", help = "描边宽度", default_value = "1")]
     pub outline: f64,
+
+    #[clap(long = "shadow", help = "阴影", default_value = "1")]
+    pub shadow: f64,
 
     #[clap(long = "bold", help = "加粗")]
     #[serde(default)]
@@ -158,6 +162,7 @@ impl Args {
             opacity: ((1.0 - self.alpha) * 255.0) as u8,
             bottom_percentage: 0.3,
             outline: self.outline,
+            shadow: self.shadow,
             bold: u8::from(self.bold),
             time_offset: self.time_offset,
         }

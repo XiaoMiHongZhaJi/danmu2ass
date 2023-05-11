@@ -47,32 +47,35 @@ impl super::CanvasConfig {
             format!(
                 "Style: Float,{font},{font_size},&H{a:02x}FFFFFF,&H00FFFFFF,&H{a:02x}000000,&H00000000,\
                 {bold}, 0, 0, 0, 100, 100, 0.00, 0.00, 1, \
-                {outline}, 0, 7, 0, 0, 0, 1",
+                {outline}, {shadow}, 7, 0, 0, 0, 1",
                 a = self.opacity,
                 font = self.font,
                 font_size = self.font_size,
                 bold = self.bold,
                 outline = self.outline,
+                shadow = self.shadow,
             ),
             format!(
                 "Style: Bottom,{font},{font_size},&H{a:02x}FFFFFF,&H00FFFFFF,&H{a:02x}000000,&H00000000,\
                 {bold}, 0, 0, 0, 100, 100, 0.00, 0.00, 1, \
-                {outline}, 0, 7, 0, 0, 0, 1",
+                {outline}, {shadow}, 7, 0, 0, 0, 1",
                 a = self.opacity,
                 font = self.font,
                 font_size = self.font_size,
                 bold = self.bold,
                 outline = self.outline,
+                shadow = self.shadow,
             ),
             format!(
                 "Style: Top,{font},{font_size},&H{a:02x}FFFFFF,&H00FFFFFF,&H{a:02x}000000,&H00000000,\
                 {bold}, 0, 0, 0, 100, 100, 0.00, 0.00, 1, \
-                {outline}, 0, 7, 0, 0, 0, 1",
+                {outline}, {shadow}, 7, 0, 0, 0, 1",
                 a = self.opacity,
                 font = self.font,
                 font_size = self.font_size,
                 bold = self.bold,
                 outline = self.outline,
+                shadow = self.shadow,
             ),
         ]
     }
